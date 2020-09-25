@@ -1,10 +1,11 @@
 """
 File for storing the data to be used later when conducting the sync
 The argument(s) are stored using the store data function to the ~.tasksyncer/data directory
+TODO: Unify the functions and pass what to save in argument
 """
-import click
+from source import click
 
-from storage import load_data, store_data
+from source.storage import load_data, store_data
 
 
 @click.group('set')

@@ -1,18 +1,30 @@
-import click
+"""
+File containing the logic of the polarion sync
+"""
+from source import click
 import requests
 
-from storage import load_data
+from source.storage import load_data
 
 
 @click.group("sync")
 @click.pass_context
 @click.option('--version', default='default')
 def sync(ctx, version):
+    """
+    click group
+    the --version option defines which version of saved parameters
+    will be used
+    """
     ctx.ensure_object(dict)
     ctx.obj['version'] = version
 
 
 def get_data(data, key, version):
+    """
+    :returns the data[version][key] value or data['default'][key] if the
+        former is not present
+    """
     try:
         return data[version][key]
     except KeyError:
@@ -20,6 +32,9 @@ def get_data(data, key, version):
 
 
 def new_project(data, version, project):
+    """
+    calls the endpoint for creating new projects in the tasksyncer
+    """
     hostname = get_data(data, 'hostname', version)
     column_names = get_data(data, 'column_names', version)
 
@@ -33,6 +48,9 @@ def new_project(data, version, project):
 
 
 def trello_sync(data, version, project):
+    """
+    calls the endpoint for syncing issues from trello of tasksyncer
+    """
     hostname = get_data(data, 'hostname', version)
     token1 = get_data(data, 'token1', version)
     token2 = get_data(data, 'token2', version)
@@ -55,6 +73,9 @@ def trello_sync(data, version, project):
 
 
 def polarion_push(data, version, project, polarion_url, test_cycle):
+    """
+    calls the endpoint for pushing issues to polarion
+    """
     hostname = get_data(data, 'hostname', version)
     polarion_url = polarion_url or get_data(data, 'polarion_url', version)
     polarion_project = get_data(data, 'polarion_project', version)
@@ -79,6 +100,10 @@ def polarion_push(data, version, project, polarion_url, test_cycle):
 @click.option('--test_cycle')
 @click.pass_context
 def polarion(ctx, project, polarion_url, test_cycle):
+    """
+    Conducts the polarion sync - calls the tasksyncer endpoints for the
+    new project, trello sync and the push to polarion
+    """
     version = ctx.obj['version']
     data = load_data()
     try:
