@@ -1,4 +1,4 @@
-from source import click
+import click
 
 from source.storage import load_data
 

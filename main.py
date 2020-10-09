@@ -1,10 +1,10 @@
-from source import click
+import click
 
 from source.storage import data_dir
 
-from source.click.set_data import set_data
-from source.click.get_data import get_data
-from source.click import sync
+from source.cli.set_data import set_data
+from source.cli.get_data import get_data
+from source.cli.sync import sync
 
 
 @click.group()

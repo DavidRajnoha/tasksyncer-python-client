@@ -1,7 +1,7 @@
 """
 File containing the logic of the polarion sync
 """
-from source import click
+import click
 import requests
 
 from source.storage import load_data
@@ -12,7 +12,7 @@ from source.storage import load_data
 @click.option('--version', default='default')
 def sync(ctx, version):
     """
-    click group
+    cli group
     the --version option defines which version of saved parameters
     will be used
     """
@@ -20,7 +20,7 @@ def sync(ctx, version):
     ctx.obj['version'] = version
 
 
-def get_data(data, key, version):
+def get_data(data, key, version='default'):
     """
     :returns the data[version][key] value or data['default'][key] if the
         former is not present
