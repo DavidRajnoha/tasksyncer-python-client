@@ -83,10 +83,11 @@ def polarion_push(data, version, project, polarion_url, test_cycle):
     password = get_data(data, 'password', version)
     test_cycle = test_cycle or get_data(data, 'test_cycle', version)
     ignore_titles = get_data(data, 'ignore_titles', version)
+    ignore_labels = get_data(data, 'ignore_labels', version)
 
     url_polarion = f"{hostname}/v1/project/{project}/polarion/{polarion_project}"
     params_polarion = {"url": polarion_url, "username": username, "password": password, "testCycle": test_cycle,
-                       "ignore_titles": ignore_titles}
+                       "ignoreTitles": ignore_titles, "ignoreLabels": ignore_labels}
 
     response = requests.post(url_polarion, params=params_polarion)
     if response.status_code != 200:

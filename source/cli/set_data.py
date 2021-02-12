@@ -10,7 +10,7 @@ from source.storage import load_data, store_data
 ALLOWED_KEYS = ['hostname', 'project', 'polarion_url', 'column_names',
                 'token1', 'token2', 'namespace', 'column_mapping_names',
                 'column_mapping_trello', 'polarion_project', 'username',
-                'password', 'test_cycle', 'ignore_titles']
+                'password', 'test_cycle', 'ignore_titles', 'ignore_labels']
 
 
 @click.command('set')

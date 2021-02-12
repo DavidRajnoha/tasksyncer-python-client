@@ -1,3 +1,5 @@
+import json
+
 import click
 
 from source.storage import load_data
@@ -14,4 +16,4 @@ def show_data():
     prints the stored data
     """
     data = load_data()
-    print(data)
+    print(json.dumps(data, indent=4))
